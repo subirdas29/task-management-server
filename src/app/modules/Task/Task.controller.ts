@@ -7,6 +7,8 @@ import { taskService } from './Task.service';
 const taskController = catchAsync(async (req, res) => {
 
   const result = await taskService.createTask(req.body);
+   const io = req.app.get('io');
+  io.emit('taskCreated', result);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -50,6 +52,8 @@ const updateTaskController = catchAsync(async (req, res) => {
   } = req;
 
   const result = await taskService.taskStatus(taskId);
+  const io = req.app.get('io');
+  io.emit('taskUpdated', result); 
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -65,6 +69,9 @@ const deleteTaskController = catchAsync(async (req, res) => {
   } = req;
 
   const result = await taskService.taskDelete(taskId);
+
+   const io = req.app.get('io');
+  io.emit('taskDeleted', taskId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
