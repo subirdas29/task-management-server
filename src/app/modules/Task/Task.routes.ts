@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post('/',TaskController.taskController);
 
-router.get('/alltasks', TaskController.getAllTaskController);
+// router.get('/alltasks', TaskController.getAllTaskController);
 
 
 
