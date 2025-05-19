@@ -2,7 +2,6 @@
 import { Schema, model } from 'mongoose';
 import { ITask } from './Task.interface';
 
-
 const TaskSchema = new Schema<ITask>(
   {
     title: {
@@ -21,13 +20,13 @@ const TaskSchema = new Schema<ITask>(
     },
     status: {
       type: String,
-      enum: ["Pending","Completed"],
-      default: "Pending",
+      enum: ['Pending', 'Completed'],
+      default: 'Pending',
     },
   },
   {
-    timestamps: true, 
-  }
+    timestamps: true,
+  },
 );
 
 const Task = model<ITask>('Task', TaskSchema);

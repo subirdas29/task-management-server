@@ -26,9 +26,8 @@ class QueryBuilder<T> {
   }
 
   filter() {
-    const queryObj = { ...this.query }; // copy
+    const queryObj = { ...this.query };
 
-    // Filtering
     const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
 
     excludeFields.forEach((el) => delete queryObj[el]);
@@ -64,29 +63,29 @@ class QueryBuilder<T> {
     return this;
   }
 
-  async countTotal(){
-    const totalQuery = this.modelQuery.getFilter() 
+  async countTotal() {
+    const totalQuery = this.modelQuery.getFilter();
     const total = await this.modelQuery.model.countDocuments(totalQuery);
     const page = Number(this?.query?.page) || 1;
     const limit = Number(this?.query?.limit) || 10;
-    const totalPage = Math.ceil(total/limit)
+    const totalPage = Math.ceil(total / limit);
 
     return {
       total,
       page,
       limit,
-      totalPage
-    }
+      totalPage,
+    };
   }
-  priceRange(minPrice?:number, maxPrice?:number){
-    const priceFilter: Record<string,unknown> = {};
-    if(minPrice!==undefined) priceFilter.$gte = minPrice;
-    if(maxPrice !==undefined) priceFilter.$lte = maxPrice
+  priceRange(minPrice?: number, maxPrice?: number) {
+    const priceFilter: Record<string, unknown> = {};
+    if (minPrice !== undefined) priceFilter.$gte = minPrice;
+    if (maxPrice !== undefined) priceFilter.$lte = maxPrice;
 
-    if(minPrice !== undefined || maxPrice !== undefined){
+    if (minPrice !== undefined || maxPrice !== undefined) {
       this.modelQuery = this.modelQuery.find({
-        price:priceFilter,
-      }as FilterQuery<T>)
+        price: priceFilter,
+      } as FilterQuery<T>);
     }
     return this;
   }
