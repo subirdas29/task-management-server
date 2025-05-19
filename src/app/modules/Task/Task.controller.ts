@@ -21,22 +21,41 @@ const taskController = catchAsync(async (req, res) => {
     });
   });
 
-//   const getAllTaskController = catchAsync(async (req, res) => {
-//     const query = req.query
+  const getAllTaskController = catchAsync(async (req, res) => {
+    const query = req.query
   
-//     const result = await taskService.getAllTasks(query);
-//     sendResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       message: "Tasks fetched successfully",
-//       meta:result.meta,
-//       data: result.result,
-//     });
-//   });
+    const result = await taskService.getAllTasks(query);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Tasks fetched successfully",
+      meta:result.meta,
+      data: result.result,
+    });
+  });
+
+  const updateTaskController = catchAsync(async (req, res) => {
+  const {
+    params: { taskId },
+  } = req;
+
+
+  const result = await taskService.taskStatus(
+    taskId,
+  );
+
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Task Status updated successfully",
+    data: result,
+  });
+});
   
   export const TaskController = {
     taskController,
-    // getAllTaskController,
-
+    getAllTaskController,
+   updateTaskController
   };
   

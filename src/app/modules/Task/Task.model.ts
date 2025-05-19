@@ -19,6 +19,11 @@ const TaskSchema = new Schema<ITask>(
       type: Date,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["Pending","Completed"],
+      default: "Pending",
+    },
   },
   {
     timestamps: true, 

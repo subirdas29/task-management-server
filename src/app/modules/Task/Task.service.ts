@@ -1,4 +1,4 @@
-// import QueryBuilder from "../../builder/QueryBuilder";
+import QueryBuilder from "../../builder/QueryBuilder";
 import { ITask } from "./Task.interface";
 import Task from "./Task.model";
 
@@ -11,37 +11,45 @@ const createTask = async (payload:ITask) => {
 };
 
 //all tasks for everyone
-// const getAllTasks = async (query: Record<string, unknown>) => {
+const getAllTasks = async (query: Record<string, unknown>) => {
+
+  const taskQuery = new QueryBuilder(
+    Task.find(),
+    query
+  )
+    // .search()
+    .filter()
+    .sort()
+    .paginate()
+    .fields()
+
+  const result = await taskQuery.modelQuery.lean();
+  const meta = await taskQuery.countTotal();
+
+  return {
+    result,
+    meta,
+  };
+};
 
 
+const taskStatus = async (taskId:string) => {
+ const result = await Task.findByIdAndUpdate(taskId,
+     {
+     status:"Completed"
+     },
+     {
+    new:true
+ })
+ return result
+};
 
-
-//   const taskQuery = new QueryBuilder(
-//     task.find().populate({
-//       path: 'taskProvider',
-//       populate: { path: 'userId' }
-//     }),
-//     query
-//   )
-//     .search(['name', 'category'])
-//     .filter()
-//     .sort()
-//     .paginate()
-//     .fields()
-
-//   const result = await taskQuery.modelQuery.lean();
-//   const meta = await taskQuery.countTotal();
-
-//   return {
-//     result,
-//     meta,
-//   };
-// };
 
 
 
 
 export const taskService = {
     createTask,
-    // getAllTasks,
+    getAllTasks,
+    taskStatus
 }
