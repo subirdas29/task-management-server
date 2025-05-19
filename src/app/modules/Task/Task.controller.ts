@@ -5,7 +5,9 @@ import httpStatus from 'http-status';
 import { taskService } from './Task.service';
 
 const taskController = catchAsync(async (req, res) => {
+
   const result = await taskService.createTask(req.body);
+
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
@@ -27,6 +29,21 @@ const getAllTaskController = catchAsync(async (req, res) => {
   });
 });
 
+const oneTaskController =
+catchAsync(async (req, res) => {
+
+  const {taskId} = req.params;
+
+  const result = await taskService.oneTaskDetails(taskId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Task fetched successfully",
+    data: result,
+  });
+});
+
+
 const updateTaskController = catchAsync(async (req, res) => {
   const {
     params: { taskId },
@@ -47,18 +64,19 @@ const deleteTaskController = catchAsync(async (req, res) => {
     params: { taskId },
   } = req;
 
-  await taskService.taskDelete(taskId);
+  const result = await taskService.taskDelete(taskId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Task deleted successfully',
-    data: null,
+    data: result,
   });
 });
 
 export const TaskController = {
   taskController,
+  oneTaskController,
   getAllTaskController,
   updateTaskController,
   deleteTaskController,
