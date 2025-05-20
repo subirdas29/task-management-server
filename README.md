@@ -6,29 +6,52 @@ This is the backend API for the Task Management App. It provides CRUD operations
 
 ---
 
-## Link
-Live Link: https://task-management-client-gray.vercel.app/
-api link: https://task-management-server-production-faae.up.railway.app/
+## Live Links
+
+- Frontend (Client) URL: [https://task-management-client-gray.vercel.app/](https://task-management-client-gray.vercel.app/)
+- Backend API URL: [https://task-management-server-production-faae.up.railway.app/](https://task-management-server-production-faae.up.railway.app/)
+
+---
 
 ## Features
 
 - Create, read, update, and delete tasks
-- Pagination support for listing tasks
-- Real-time updates for task creation and updates using Socket.IO
+- Pagination support for listing tasks (5 per page)
+- Real-time updates for task creation and status updates using Socket.IO
 - Basic environment-based configuration for flexibility
+- Promise-based API handling with async/await
 
 ---
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- Socket.IO for real-time communication
-- dotenv for environment variable management
-- TypeScript
+- **Node.js** — JavaScript runtime for backend
+- **Express.js** — Web framework for building RESTful APIs
+- **MongoDB with Mongoose** — NoSQL database and ORM for data modeling
+- **Socket.IO** — Real-time bidirectional communication for live task updates
+- **dotenv** — Environment variable management
+- **TypeScript** — Typed JavaScript for better developer experience and fewer runtime errors
 
 ---
+
+## Setup Instructions
+
+### Backend Setup
+
+1. **Clone the repository and navigate to the backend folder:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd <repo-folder>/backend
+
+2. **Install backend dependencies:**
+    ```npm install
+
+3. **Create a .env file in the backend folder and add the following environment variables:**
+    ``` NODE_ENV=development
+    PORT=5000
+    DATABASE_URL=database link
+
 
 ## API Endpoints
 
@@ -40,7 +63,7 @@ The backend exposes the following RESTful API routes for managing tasks:
 | `GET`       | `api/task/alltasks`             | Retrieve a paginated list of tasks |
 | `GET`       | `api/task/taskdetails/:taskId`  | Get details of a single task       |
 | `PATCH`     | `api/task/taskstatus/:taskId`   | Update task status (toggle completed/pending) |
-| `DELETE`    | `api/task/:taskId`              | Delete a task (optional)            |
+| `DELETE`    | `api/task/:taskId`              | Delete a task           |
 
 ### Route Details
 
