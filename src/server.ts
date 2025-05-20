@@ -17,12 +17,17 @@ async function main() {
     });
 
    
-    io = new SocketIOServer(server, {
-      cors: {
-        origin: '*', 
-        methods: ['GET', 'POST'],
-      },
-    });
+  io = new SocketIOServer(server, {
+  cors: {
+    origin: [
+      'http://localhost:5173',
+      'https://task-management-client-gray.vercel.app',
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+});
+
 
   
     io.on('connection', (socket) => {
