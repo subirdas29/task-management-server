@@ -29,3 +29,34 @@ api link: https://task-management-server-production-faae.up.railway.app/
 - TypeScript
 
 ---
+
+## API Endpoints
+
+The backend exposes the following RESTful API routes for managing tasks:
+
+| HTTP Method | Endpoint                | Description                          |
+|-------------|-------------------------|------------------------------------|
+| `POST`      | `api/task/`                     | Create a new task                  |
+| `GET`       | `api/task/alltasks`             | Retrieve a paginated list of tasks |
+| `GET`       | `api/task/taskdetails/:taskId`  | Get details of a single task       |
+| `PATCH`     | `api/task/taskstatus/:taskId`   | Update task status (toggle completed/pending) |
+| `DELETE`    | `api/task/:taskId`              | Delete a task (optional)            |
+
+### Route Details
+
+- **POST /**  
+  Create a new task by sending task data (title, description, due date) in the request body.
+
+- **GET /alltasks**  
+  Fetch paginated tasks with a default of 5 tasks per page.
+
+- **GET /taskdetails/:taskId**  
+  Fetch detailed information for a specific task by providing the task ID in the URL.
+
+- **PATCH /taskstatus/:taskId**  
+  Update the completion status of a specific task identified by its ID.
+
+- **DELETE /:taskId**  
+  Remove a task from the database by its ID. (Optional feature)
+
+---
