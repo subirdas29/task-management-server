@@ -45,10 +45,12 @@ This is the backend API for the Task Management App. It provides CRUD operations
    cd <repo-folder>/backend
 
 2. **Install backend dependencies:**
-    ```npm install
+    ```
+    npm install
 
 3. **Create a .env file in the backend folder and add the following environment variables:**
-    ``` NODE_ENV=development
+    ``` 
+    NODE_ENV=development
     PORT=5000
     DATABASE_URL=database link
 
